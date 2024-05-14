@@ -1,0 +1,8 @@
+<h1>Articles</h1>
+
+<div id="articles">
+  <% @articles.each do |article| %>
+    <%= render partial: "articles", locals: { article: article } %>
+  <% end %>
+</div>
+
