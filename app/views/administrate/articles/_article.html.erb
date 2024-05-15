@@ -9,4 +9,14 @@
     <%= article.body %>
   </p>
 
+  <p>
+    <strong>Cover Image:</strong>
+    <%= image_tag article.cover_image.variant(:thumb) if article.cover_image.attached? %>
+    <!-- 
+    <%= image_tag article.cover_image.variant(:cover) if article.cover_image.attached? %>
+    <%# imagem original sem variant %>
+    <%= image_tag article.cover_image if article.cover_image.attached? %>
+    -->
+  </p>
+
 </div>

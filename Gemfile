@@ -44,16 +44,18 @@ gem "tzinfo-data", platforms: [:windows, :jruby]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 gem "friendly_id", "~> 5.5", ">= 5.5.1"
 gem "devise", "~> 4.9", ">= 4.9.4"
+gem "sassc-rails", "~> 2.1", ">= 2.1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: [:mri, :windows]
   gem "faker", "~> 3.3", ">= 3.3.1"
   gem "tty-spinner", "~> 0.9.3"
+  gem "dotenv", "~> 3.1", ">= 3.1.2"
 end
 
 group :development do

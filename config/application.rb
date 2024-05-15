@@ -48,5 +48,8 @@ module RubyonrailsclubBlog
     config.i18n.available_locales = [:"pt-BR", :en]
     config.i18n.default_locale = :"pt-BR"
     config.encoding = "utf-8"
+
+    # Active Storage
+    config.active_storage.variant_processor = :mini_magick
   end
 end

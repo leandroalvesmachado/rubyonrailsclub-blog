@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   namespace :administrate do
-    resources :articles
+    resources :articles do
+      member do
+        delete :destroy_cover_image
+      end
+    end
   end
 end
