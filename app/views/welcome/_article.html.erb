@@ -1,0 +1,15 @@
+<a href="#" class="item">
+  <!-- <%= cover_image_fallback(article) %> -->
+  <%= image_tag(cover_image_fallback(article), class: "item-image", alt:"article image") %>
+  <div class="item-row">
+    <div class="item-category">Backend</div>
+    <div class="item-comments">25</div>
+  </div>
+  <div class="item-row">
+    <div class="item-title"><%= article.title %></div>
+  </div>
+  <div class="item-row">
+    <div class="item-author">Jackson Pires</div>
+    <div class="item-date">fds</div>
+  </div>
+</a>

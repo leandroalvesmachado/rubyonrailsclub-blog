@@ -1,9 +1,17 @@
-<div>
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-    <strong>Date:</strong>
-    <%= l(article.created_at, format: :only_date) %>
-  </p>
-  <%= image_tag article.cover_image.variant(:thumb) if article.cover_image.attached? %>
-</div>
+<section class="section posts-grid-section">
+  <div class="container">
+    <div class="title-container with-item">
+      <h2 class="title">Publicações mais recentes</h2>
+      <a href="#" class="button">Ver todos</a>
+    </div>
+    <div class="grid" id="postGridHome">
+      <% @articles.each do |article| %>
+        <%= render partial: 'article', locals: { article: article } %>
+      <% end %>
+    </div>
+    <div class="grid-mobile">
+      <div class="bullets" id="postGridHomeBullets"></div>
+      <div><a href="#" class="button clean">ver mais</a></div>
+    </div>
+  </div>
+</section>

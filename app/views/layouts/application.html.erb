@@ -19,9 +19,7 @@
   </head>
   <body>
     <%= render 'layouts/shared/application/header' %>
-    <%= render 'layouts/shared/application/main_banner' %>
-    <%= render 'layouts/shared/application/articles' %>
-    <%= render 'layouts/shared/application/categories' %>
+    <%= yield %>
     <%= render 'layouts/shared/application/footer' %>
     <%= javascript_include_tag "jquery/jquery1.min", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "slick/slick.min", "data-turbo-track": "reload" %>

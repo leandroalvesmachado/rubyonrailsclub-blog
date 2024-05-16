@@ -1,8 +1,3 @@
-<h1>Articles</h1>
-
-<div id="articles">
-  <% @articles.each do |article| %>
-    <%= render partial: "articles", locals: { article: article } %>
-  <% end %>
-</div>
-
+<%= render partial: 'main_banner' %>
+<%= render partial: 'articles' %>
+<%= render partial: 'categories' %>
