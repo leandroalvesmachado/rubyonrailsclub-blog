@@ -1,22 +1,48 @@
-<p style="color: green"><%= notice %></p>
+<h1 class="admin-title">Artigos</h1>
+<div class="main-content">
+  <div class="row">
+    <h2 class="admin-subtitle">Listagem de artigos</h2>
+    <div class="buttons">
+      <%= link_to new_administrate_article_path, class: "button small" do %>
+        <%= image_tag "icons/white/add.svg", title: "add" %>
+        Adicionar novo artigo
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Categoria</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @articles.each do |article| %>
+          <tr>
+            <td><%= l(article.created_at, format: :short) %></td>
+            <td>Frontend</td>
+            <td><%= article.title %></td>
+            <td>
+              <div class="icons">
+                <%= link_to edit_administrate_article_path(article), title: "Editar", alt: "edit" do %>
+                  <%= image_tag "icons/gray/edit.svg" %>
+                <% end %>
 
-<p>Bem-vindo <%= current_admin.email %></p>
-
-<% if admin_signed_in? %>
-  <%= link_to destroy_admin_session_path, data: { turbo_method: :delete } do %>
-    Fazer Logoff
-  <% end %>
-<% end %>
-
-<h1>Articles</h1>
-
-<div id="articles">
-  <% @articles.each do |article| %>
-    <%= render article %>
-    <p>
-      <%= link_to "Mostrar este artigo", [:administrate, article] %>
-    </p>
-  <% end %>
+                <%= link_to [:administrate, article], title: "Visualizar", alt: "eye" do %>
+                  <%= image_tag "icons/gray/eye.svg" %>
+                <% end %>
+                
+                <%= button_to [:administrate, article], title: "Apagar", class: "button-transparent", alt: "close", data: { turbo: false }, method: :delete do %>
+                  <%= image_tag "icons/gray/close.svg" %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-<%= link_to "Novo artigo", new_administrate_article_path %>

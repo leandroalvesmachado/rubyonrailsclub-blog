@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   namespace :administrate do
+    get "/" => "dashboards#index"
+
     resources :articles do
       member do
         delete :destroy_cover_image
