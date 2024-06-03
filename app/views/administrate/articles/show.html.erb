@@ -1,9 +1,15 @@
-<%= link_to "Artigos", administrate_articles_path, class:"admin-title" %>
-
+<%= link_to "Artigos", administrate_articles_path, class:"admin-title"%>
 <div class="main-content">
   <div class="row">
     <h2 class="admin-subtitle">Visualização de artigo</h2>
+    <div class="buttons">
+      <%= link_to edit_administrate_article_path(@article), class:"button small" do %>
+        <%= image_tag "icons/white/edit.svg", alt:"save" %>
+        Editar artigo
+      <% end  %>
+    </div>
   </div>
-  <%= render "form", article: @article, action: :show %>
+
+  <%= render "form", article: @article %>
 </div>
 

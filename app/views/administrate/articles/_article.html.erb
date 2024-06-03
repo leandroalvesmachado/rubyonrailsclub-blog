@@ -1,21 +1,20 @@
-<div id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
+<tr>
+  <td><%= l(article.created_at, format: :short) %></td>
+  <td><%= 'article.category.name' %></td>
+  <td><%= article.title %></td>
+  <td>
+    <div class="icons">
+      <%= link_to edit_administrate_article_path(article), title: "Editar", alt: "edit" do %>
+        <%= image_tag "icons/gray/edit.svg" %>
+      <% end %>
 
-  <p>
-    <strong>Body:</strong>
-    <%= article.body %>
-  </p>
+      <%= link_to [:administrate, article], title: "Visualizar", alt: "eye" do %>
+        <%= image_tag "icons/gray/eye.svg" %>
+      <% end %>
 
-  <p>
-    <strong>Cover Image:</strong>
-    <%= image_tag article.cover_image.variant(:thumb) if article.cover_image.attached? %>
-    <!-- 
-    <%= image_tag article.cover_image.variant(:cover) if article.cover_image.attached? %>
-    <%# imagem original sem variant %>
-    <%= image_tag article.cover_image if article.cover_image.attached? %>
-    -->
-  </p>
-</div>
+      <%= button_to [:administrate, article], title: "Apagar", class: "button-transparent", alt: "close", data: { turbo: false }, method: :delete do %>
+        <%= image_tag "icons/gray/close.svg" %>
+      <% end %>
+    </div>
+  </td>
+</tr>
