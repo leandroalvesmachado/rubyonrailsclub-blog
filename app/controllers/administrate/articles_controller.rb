@@ -6,6 +6,7 @@ module Administrate
 
     # GET /articles or /articles.json
     def index
+      # resolvedo problema n+1 (includes)
       @articles = Article.includes(:category).all
     end
 
@@ -80,7 +81,7 @@ module Administrate
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :body, :cover_image)
+      params.require(:article).permit(:title, :body, :category_id, :cover_image)
     end
   end
 end
