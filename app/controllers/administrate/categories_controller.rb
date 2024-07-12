@@ -49,10 +49,18 @@ module Administrate
     end
 
     def destroy
-      @category.destroy!
-
       respond_to do |format|
-        format.html { redirect_to(administrate_categories_url, notice: "Category was successfully destroyed.") }
+        format.html do
+          if @category.articles.count > 0
+            redirect_to(
+              administrate_categories_url,
+              alert: "Existem Artigos associados a essa categoria. Não é possível apagá-la.",
+            )
+          else
+            @category.destroy!
+            redirect_to(administrate_categories_url, notice: "Categoria apagada com sucesso!")
+          end
+        end
         format.json { head(:no_content) }
       end
     end
