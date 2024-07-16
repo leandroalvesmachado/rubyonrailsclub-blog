@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
+  resources :articles, only: [:show]
+
   namespace :administrate do
     get "/" => "dashboards#index"
 
