@@ -15,6 +15,7 @@ namespace :dev do
       system("rails db:create")
       system("rails db:migrate")
       system("rails db:seed")
+      system("rails dev:clear_storage_folder")
       system("rails dev:add_categories")
       system("rails dev:add_articles")
     end
@@ -28,6 +29,11 @@ namespace :dev do
   desc "Add articles to the database"
   task add_articles: :environment do
     show_spinner("Adding articles to the database") { add_articles }
+  end
+
+  desc "Clear storage"
+  task clear_storage_folder: :environment do
+    show_spinner("cleaning up storage folder") { clear_storage }
   end
 
   def add_categories
@@ -56,12 +62,34 @@ namespace :dev do
         created_at: Faker::Date.between(from: 1.year.ago, to: Date.current),
       )
 
-      image_id = rand(1..3)
+      image_id = rand(1..5)
+
+      # article.cover_image.attach(
+      #   io: File.open(Rails.root.join("lib/tasks/images/article_#{image_id}.jpg")),
+      #   filename: "article_#{image_id}.jpg",
+      # )
 
       article.cover_image.attach(
-        io: File.open(Rails.root.join("lib/tasks/images/article_#{image_id}.jpg")),
-        filename: "article_#{image_id}.jpg",
+        io: File.open(Rails.root.join("lib/tasks/images/full-hd/0#{image_id}.jpg")),
+        filename: "article_0#{image_id}.jpg",
       )
+    end
+  end
+
+  def clear_storage
+    storage_directory = Rails.root.join("storage")
+
+    if Dir.exist?(storage_directory)
+      Dir.foreach(storage_directory) do |item|
+        next if item == "." || item == ".." || item == ".keep"
+
+        file_path = File.join(storage_directory, item)
+        if File.file?(file_path)
+          File.delete(file_path)
+        elsif File.directory?(file_path)
+          FileUtils.rm_rf(file_path)
+        end
+      end
     end
   end
 end

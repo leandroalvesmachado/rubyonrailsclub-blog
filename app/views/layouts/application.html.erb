@@ -18,10 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <%= javascript_importmap_tags %>
   </head>
-  <body>
+  <body class="<%= "page-post-detail" if controller_name == "articles" %>">
     <%= render 'layouts/shared/application/header' %>
     <%= yield %>
     <%= render 'layouts/shared/application/footer' %>
+
     <%= javascript_include_tag "jquery/jquery1.min", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "slick/slick.min", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
