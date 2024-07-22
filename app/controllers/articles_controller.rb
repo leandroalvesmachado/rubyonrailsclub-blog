@@ -11,5 +11,6 @@ class ArticlesController < ApplicationController
   def set_article
     # @article = Article.find(params[:id])
     @article = Article.friendly.find(params[:id])
+    @other_articles = Article.all.sample(3)
   end
 end
