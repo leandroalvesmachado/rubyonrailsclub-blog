@@ -11,4 +11,7 @@ class Article < ApplicationRecord
     attachable.variant(:thumb, resize_to_limit: [325, 205])
     attachable.variant(:medium, resize_to_limit: [850, 650])
   end
+
+  # Sempre inclui category e author nas consultas
+  default_scope { includes(:category, :author) }
 end
