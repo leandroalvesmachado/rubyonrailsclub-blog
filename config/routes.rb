@@ -24,7 +24,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :authors
+    resources :authors do
+      member do
+        delete :destroy_avatar_image
+      end
+    end
 
     resources :categories do
       member do
