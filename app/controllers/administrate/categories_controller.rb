@@ -2,7 +2,7 @@
 
 module Administrate
   class CategoriesController < AdministrateController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: [:show, :edit, :update, :destroy, :destroy_cover_image]
 
     def index
       @categories = Category.all
@@ -20,6 +20,7 @@ module Administrate
 
     def create
       @category = Category.new(category_params)
+      @category.cover_image.attach(category_params[:cover_image])
 
       respond_to do |format|
         if @category.save
@@ -65,10 +66,19 @@ module Administrate
       end
     end
 
+    # DELETE /administrate/categories/:id/destroy_cover_image
+    def destroy_cover_image
+      @category.cover_image.purge
+
+      respond_to do |format|
+        format.turbo_stream { render(turbo_stream: turbo_stream.remove(@category)) }
+      end
+    end
+
     private
 
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :description, :cover_image)
     end
 
     def set_category
