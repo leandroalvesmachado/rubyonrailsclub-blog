@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
 namespace :dev do
-  def show_spinner(msg_start, msg_end = "Done!")
-    spinner = TTY::Spinner.new("[:spinner] #{msg_start}")
-    spinner.auto_spin
-    yield
-    spinner.success("(#{msg_end})")
-  end
-
   desc "Reset the database"
   task reset: :environment do
     show_spinner("Resetting database...") do
@@ -19,7 +12,16 @@ namespace :dev do
       system("rails dev:add_categories")
       system("rails dev:add_authors")
       system("rails dev:add_articles")
+      system("rails dev:add_users")
+      system("rails dev:add_comments")
     end
+  end
+
+  def show_spinner(msg_start, msg_end = "Done!")
+    spinner = TTY::Spinner.new("[:spinner] #{msg_start}")
+    spinner.auto_spin
+    yield
+    spinner.success("(#{msg_end})")
   end
 
   desc "Add categories to the database"
@@ -40,6 +42,16 @@ namespace :dev do
   desc "Clear storage"
   task clear_storage_folder: :environment do
     show_spinner("Cleaning up storage folder") { clear_storage }
+  end
+
+  desc "Add users to the database"
+  task add_users: :environment do
+    show_spinner("Adding users to the database") { add_users }
+  end
+
+  desc "Add comments to the database"
+  task add_comments: :environment do
+    show_spinner("Adding comments to the database") { add_comments }
   end
 
   def add_categories
@@ -117,6 +129,26 @@ namespace :dev do
           FileUtils.rm_rf(file_path)
         end
       end
+    end
+  end
+
+  def add_users
+    30.times do
+      User.create(
+        email: Faker::Internet.email,
+        password: ENV["DEFAULT_PASSWORD"],
+        password_confirmation: ENV["DEFAULT_PASSWORD"],
+      )
+    end
+  end
+
+  def add_comments
+    100.times do
+      Comment.create(
+        user: User.all.sample,
+        article: Article.all.sample,
+        body: Faker::Lorem.paragraph(sentence_count: rand(1..5)),
+      )
     end
   end
 end
