@@ -147,7 +147,8 @@ namespace :dev do
       Comment.create(
         user: User.all.sample,
         article: Article.all.sample,
-        body: Faker::Lorem.paragraph(sentence_count: rand(1..5)),
+        body: Faker::Lorem.paragraph(sentence_count: rand(3..10)),
+        created_at: Faker::Date.between(from: 1.year.ago, to: Date.current),
       )
     end
   end
