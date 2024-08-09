@@ -110,9 +110,10 @@
           </div>
         </div>
         <div class="comment-form-container">
-          <textarea class="textarea darker full double-padding"
-            placeholder="Insira seu comentário aqui..."></textarea>
-          <button class="button small">Publicar</button>
+          <%= form_with(url: '#') do |form| %>
+            <%= form.text_area :body, class: 'textarea darker full double-padding', placeholder: 'Insira seu comentário aqui...' %>
+            <%= form.submit 'Publicar', class: 'button small' %>
+          <% end %>
         </div>
         <div class="post-detail-comments-list">
           <% @article.comments.each do |comment| %>
