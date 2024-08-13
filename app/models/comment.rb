@@ -6,4 +6,6 @@ class Comment < ApplicationRecord
 
   # Sempre inclui user e article nas consultas
   default_scope { includes(:user, :article) }
+
+  validates :body, presence: true
 end

@@ -5,23 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruby on Rails Club - Home</title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <!-- Favicon -->
     <%= favicon_link_tag asset_path("favicon.ico") %>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="libs/slick/slick.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;600;800&display=swap"
+      rel="stylesheet">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <%= javascript_importmap_tags %>
   </head>
+
   <body class="<%= "page-post-detail" if controller_name == "articles" %>">
-    <%= render 'layouts/shared/application/header' %>
+    <%= render "layouts/shared/application/header" %>
     <%= yield %>
-    <%= render 'layouts/shared/application/footer' %>
+    <%= render "layouts/shared/application/footer" %>
+
 
     <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "posts-grid", "data-turbo-track": "reload" %>

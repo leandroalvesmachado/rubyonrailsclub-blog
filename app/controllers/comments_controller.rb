@@ -5,9 +5,16 @@ class CommentsController < ApplicationController
   before_action :set_article, only: [:create]
 
   def create
-    @article.comments.create!(comment_params.merge(user: current_user))
+    comment = @article.comments.new(comment_params)
 
-    redirect_to(article_path(@article))
+    if comment.save
+      redirect_to(article_path(@article), notice: "Comentário criado com sucesso")
+    else
+      redirect_to(
+        article_path(@article),
+        alert: "Erro ao criar comentário! - #{comment.errors.full_messages.join(",")}",
+      )
+    end
   end
 
   private
