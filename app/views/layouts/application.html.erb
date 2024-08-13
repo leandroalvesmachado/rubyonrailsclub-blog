@@ -23,10 +23,10 @@
     <%= yield %>
     <%= render 'layouts/shared/application/footer' %>
 
-    <%= javascript_include_tag "jquery/jquery1.min", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "slick/slick.min", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "menu", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "posts-grid", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "jquery/jquery1.min", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "slick/slick.min", "data-turbo-track": "reload" %>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <% if notice %>
@@ -36,6 +36,18 @@
           duration: 3000,
           style: {
             background: "green",
+          }
+        }).showToast();
+      </script>
+    <% end %>
+
+    <% if alert %>
+      <script>
+        Toastify({
+          text: "<%= alert %>",
+          duration: 3000,
+          style: {
+            background: "#930f17",
           }
         }).showToast();
       </script>

@@ -1,6 +1,6 @@
 <header class="section header-section">
   <div class="container">
-    <%= link_to root_path, class: 'logo', style: '' do %>
+    <%= link_to root_path, class:"logo" do %>
       <%= image_tag "logo.svg", alt: "Logo Ruby on Rails Club" %>
     <% end %>
     <nav class="menu" id="menu">
@@ -8,26 +8,25 @@
         <%= image_tag "icons/white/close.svg", alt: "Close Button" %>
       </a>
       <ul>
-        <li>
-          <%= link_to 'Início', root_path %>
-        </li>
+        <li><%= link_to "Início", root_path %></li>
         <li><a href="#">Categorias</a></li>
         <li><a href="#">Cursos</a></li>
         <li><a href="#">Contato</a></li>
       </ul>
       <div class="mobile-actions">
         <div>
-          <%= link_to root_path, class: 'button secondary', style: '' do %>
-            Entrar
-          <% end %>
+          <%= link_to "Entrar", new_user_session_path, class:"button secondary" unless user_signed_in? %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class:"button secondary" if user_signed_in? %>
         </div>
       </div>
     </nav>
     <a href="#" class="open-menu-button" id="openMenuButton">
-      <%= image_tag "icons/red/menu.svg", alt: "Open Menu" %>
+      <%= image_tag "icons/red/menu.svg", alt:"Open Menu" %>
     </a>
     <div class="actions">
-      <a href="login-entrar.html" class="button">Entrar</a>
+      <%= link_to "Entrar", new_user_session_path, class:"button secondary" unless user_signed_in? %>
+      <%# button_to ele ja cria um form com o botao %>
+      <%= button_to "Sair", destroy_user_session_path, method: :delete, class:"button secondary" if user_signed_in? %>
     </div>
   </div>
 </header>
