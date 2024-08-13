@@ -3,14 +3,20 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show]
 
-  def show; end
+  def show
+    @other_articles = Article.all.sample(3)
+    @comments = comments_sorted_by
+  end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_article
-    # @article = Article.find(params[:id])
     @article = Article.friendly.find(params[:id])
-    @other_articles = Article.all.sample(3)
+  end
+
+  def comments_sorted_by
+    return @article.comments.order(created_at: :desc) if params[:sort_by] == "more_recents"
+
+    @article.comments.order(created_at: :asc)
   end
 end

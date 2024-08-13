@@ -103,10 +103,13 @@
           <div class="comment-title">Comentários</div>
           <div class="comment-actions">
             <div class="label">ordenar por: </div>
-            <select class="select clean small">
-              <option value="1">Últimos comentários</option>
-              <option value="2">Mais recentes</option>
-            </select>
+            <%= form_with(url: article_url(@article), method: :get) do |form| %>
+              <%= form.select :sort_by,
+                options_for_select([["Últimos comentários", "last_comments"], ["Mais recentes", "more_recents"]], params[:sort_by]),
+                {},
+                { class:"select clean small", onchange:"this.form.submit()" }
+              %>
+            <% end %>
           </div>
         </div>
         <div class="comment-form-container">
@@ -116,7 +119,7 @@
           <% end %>
         </div>
         <div class="post-detail-comments-list">
-          <% @article.comments.order(:created_at).each do |comment| %>
+          <% @comments.each do |comment| %>
             <% next if comment.new_record? %>
             <div class="post-detail-comment-item">
               <div class="author-row">
@@ -136,7 +139,7 @@
               <div class="actions-row">
                 <a href="#" class="like">6</a>
                 <a href="#" class="deslike">4</a>
-                <a href="#" class="share"></a>
+                <%= link_to '', "https://twitter.com/intent/tweet?text=#{comment.body}&url=#{article_url(@article)}", target: '_blank', class: 'share' %>
               </div>
             </div>
           <% end %>
