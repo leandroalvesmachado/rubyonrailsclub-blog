@@ -137,7 +137,7 @@
                 <p><%= comment.body %><p>
               </div>
               <div class="actions-row">
-                <!-- Como é via POST, então precisa ser um button e não um link -->
+                <!-- Como é via POST, então precisa ser um button e não um link e estou desabilitando o turbo -->
                 <%= button_to like_article_comment_path(@article, comment), class:"like", form: { turbo: false } do %>
                   <%= comment.like %>
                 <% end %>
