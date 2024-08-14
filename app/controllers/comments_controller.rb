@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_article, only: [:create]
+  before_action :set_article, only: [:create, :like, :dislike]
 
   def create
     comment = @article.comments.new(comment_params)
@@ -14,6 +14,22 @@ class CommentsController < ApplicationController
         article_path(@article),
         alert: "Erro ao criar comentário! - #{comment.errors.full_messages.join(",")}",
       )
+    end
+  end
+
+  def like
+    if Comment.find(params[:id]).increment!(:like)
+      redirect_to(article_path(@article), notice: "Like registrado!")
+    else
+      redirect_to(article_path(@article), alert: "Não foi possível registrar o like!")
+    end
+  end
+
+  def dislike
+    if Comment.find(params[:id]).increment!(:dislike)
+      redirect_to(article_path(@article), notice: "Like registrado!")
+    else
+      redirect_to(article_path(@article), alert: "Não foi possível registrar o like!")
     end
   end
 
