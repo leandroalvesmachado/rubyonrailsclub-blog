@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "csv"
+
 namespace :dev do
   desc "Reset the database"
   task reset: :environment do
@@ -10,6 +12,7 @@ namespace :dev do
       system("rails db:seed")
       system("rails dev:clear_storage_folder")
       system("rails dev:add_categories")
+      system("rails dev:add_categories_from_csv")
       system("rails dev:add_authors")
       system("rails dev:add_articles")
       system("rails dev:add_users")
@@ -52,6 +55,11 @@ namespace :dev do
   desc "Add comments to the database"
   task add_comments: :environment do
     show_spinner("Adding comments to the database") { add_comments }
+  end
+
+  desc "Add categories from CSV"
+  task add_categories_from_csv: :environment do
+    show_spinner("Adding categories from CSV to the database") { add_categories_from_csv }
   end
 
   def add_categories
@@ -150,6 +158,26 @@ namespace :dev do
         body: Faker::Lorem.paragraph(sentence_count: rand(3..10)),
         created_at: Faker::Date.between(from: 1.year.ago, to: Date.current),
       )
+    end
+  end
+
+  def add_categories_from_csv
+    path = Rails.root.join("lib/tasks/csv/categories.csv")
+
+    File.open(path) do |file|
+      CSV.read(file).each_with_index do |row, i|
+        next if i.zero?
+
+        # name, description = row.name, row.description
+        name, description = row
+
+        Category.create!(
+          # name: name
+          # description: description
+          name:,
+          description:,
+        )
+      end
     end
   end
 end
