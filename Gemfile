@@ -71,4 +71,5 @@ group :development do
 
   gem "rubocop-rails", "~> 2.24", ">= 2.24.1", require: false
   gem "rubocop-shopify", "~> 2.15", ">= 2.15.1", require: false
+  gem "letter_opener", "~> 1.10"
 end
