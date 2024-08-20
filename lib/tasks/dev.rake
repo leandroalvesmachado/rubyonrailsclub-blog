@@ -171,11 +171,18 @@ namespace :dev do
         # name, description = row.name, row.description
         name, description = row
 
-        Category.create!(
+        category = Category.create!(
           # name: name
           # description: description
           name:,
           description:,
+        )
+
+        image_id = rand(1..8)
+
+        category.cover_image.attach(
+          io: File.open(Rails.root.join("lib/tasks/images/categories/category#{image_id}.jpg")),
+          filename: "category_#{image_id}.jpg",
         )
       end
     end

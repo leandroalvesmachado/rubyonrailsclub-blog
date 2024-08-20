@@ -7,7 +7,9 @@
     <div class="grid">
       <% @categories.each do |category| %>
         <a href="#" class="item">
-          <%= image_tag category.cover_image, class: "item-image", alt: "Categoria" %>
+          <% if category.cover_image.present? %>
+            <%= image_tag category.cover_image, class: "item-image", alt: "Categoria" %>
+          <% end %>
           <div class="item-title"><%= category.name %></div>
           <p class="item-description"><%= category.description %></p>
         </a>

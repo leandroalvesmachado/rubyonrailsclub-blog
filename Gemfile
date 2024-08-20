@@ -51,6 +51,8 @@ gem "devise", "~> 4.9", ">= 4.9.4"
 gem "sassc-rails", "~> 2.1", ">= 2.1.2"
 gem "redcarpet", "~> 3.6"
 gem "prawn-rails", "~> 1.4", ">= 1.4.2"
+gem "ferrum", "~> 0.15"
+gem "rmagick", "~> 6.0", ">= 6.0.1"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
